@@ -1,0 +1,13 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
+    "title": "Hackathon setup",
+    "publisher": "Ultromics",
+    "description": "Setup UV, NVM/node, and docker permissions",
+    "tags": [
+    ],
+    "iconUri": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/Artifacts/linux-install-docker/dockerArtifact.png",
+    "targetOsType": "Linux",
+    "runCommand": {
+        "commandToExecute": "['bash install.sh']"
+    }
+}
