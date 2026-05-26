@@ -24,7 +24,7 @@ if [ $installationStatus -eq 127 ] ; then
     echo "Installing NVM..."
     runuser -l $TARGET_USER -c 'wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash'
     echo "Installed NVM for user $TARGET_USER."
-    runuser -l $TARGET_USER -c 'nvm install node | bash'
+    runuser -l "$TARGET_USER" -c 'export NVM_DIR="$HOME/.nvm"; . "$NVM_DIR/nvm.sh"; nvm install node; nvm alias default node'  
     echo "Installed Node for user $TARGET_USER."
     
 else
