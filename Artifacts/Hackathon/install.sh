@@ -1,4 +1,4 @@
-Script to install NVM on Linux package on Azure DevTest lab Linux VMs.
+# Script to install NVM on Linux package on Azure DevTest lab Linux VMs.
 #
 # NOTE: Intended for use by the Azure DevTest Lab artifact system.
 #
