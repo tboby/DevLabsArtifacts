@@ -11,7 +11,9 @@ Script to install NVM on Linux package on Azure DevTest lab Linux VMs.
 
 #Get the input parameter value.
 TARGET_USER=$1
-
+LOG_FILE="/var/log/linux_install_nvm_v1.log"
+exec > >(tee -a "$LOG_FILE") 2>&1
+echo "Started at $(date)"
 # Check if nvm is already installed.
 echo "Checking if NVM is already installed."
 echo "For user $TARGET_USER"
