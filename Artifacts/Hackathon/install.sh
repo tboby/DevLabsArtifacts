@@ -51,5 +51,29 @@ systemctl enable --now docker
 
 echo "Added $TARGET_USER to docker group."
 
+FILE_SHARE_HOST=$2
+FILE_SHARE_NAME=$3
+STORAGE_ACCOUNT="${FILE_SHARE_HOST%%.*}"
+MOUNT_POINT="/mount/${FILE_SHARE_NAME}"
+NFS_PATH="${FILE_SHARE_HOST}:/${STORAGE_ACCOUNT}/${FILE_SHARE_NAME}"
+
+if ! command -v mount.aznfs >/dev/null 2>&1; then
+    echo "Installing aznfs."
+    curl -sSL -O "https://packages.microsoft.com/config/$(source /etc/os-release && echo "$ID/$VERSION_ID")/packages-microsoft-prod.deb"
+    dpkg -i packages-microsoft-prod.deb
+    rm packages-microsoft-prod.deb
+    apt-get update
+    apt-get install -y aznfs
+fi
+
+mkdir -p "$MOUNT_POINT"
+
+if ! grep -q "$MOUNT_POINT" /etc/fstab; then
+    echo "$NFS_PATH $MOUNT_POINT aznfs vers=4,minorversion=1,sec=sys,nconnect=4,_netdev,nofail 0 0" >> /etc/fstab
+fi
+
+mount "$MOUNT_POINT"
+
+echo "Mounted $NFS_PATH at $MOUNT_POINT."
 
 echo "Done."
