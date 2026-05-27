@@ -18,9 +18,21 @@
       "displayName": "Target linux user",
       "allowEmpty": false,
       "description": "The name of the linux user for which the tools will be installed."
+    },
+    "fileShareHost": {
+      "type": "string",
+      "displayName": "File share host",
+      "allowEmpty": false,
+      "description": "The host url for the NFS file share to mount."
+    },
+    "fileShareName": {
+      "type": "string",
+      "displayName": "File share name",
+      "allowEmpty": false,
+      "description": "The file share name for the NFS file share to mount."
     }
   },
   "runCommand": {
-    "commandToExecute": "[concat('sh install.sh ', parameters('targetUser'))]"
+    "commandToExecute": "[concat('sh install.sh ', parameters('targetUser'), parameters('fileShareHost'), parameters('fileShareName'))]"
   }
 }
