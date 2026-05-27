@@ -33,6 +33,6 @@
     }
   },
   "runCommand": {
-    "commandToExecute": "[concat('sh install.sh ', parameters('targetUser'), parameters('fileShareHost'), parameters('fileShareName'))]"
+    "commandToExecute": "[concat('sh install.sh ', parameters('targetUser'), ' ', parameters('fileShareHost'), ' ', parameters('fileShareName'))]"
   }
 }
