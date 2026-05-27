@@ -59,9 +59,11 @@ NFS_PATH="${FILE_SHARE_HOST}:/${STORAGE_ACCOUNT}/${FILE_SHARE_NAME}"
 
 if ! command -v mount.aznfs >/dev/null 2>&1; then
     echo "Installing aznfs."
-    curl -sSL -O "https://packages.microsoft.com/config/$(source /etc/os-release && echo "$ID/$VERSION_ID")/packages-microsoft-prod.deb"
-    dpkg -i packages-microsoft-prod.deb
-    rm packages-microsoft-prod.deb
+    . /etc/os-release
+    curl -fsSL -o /tmp/packages-microsoft-prod.deb \
+        "https://packages.microsoft.com/config/${ID}/${VERSION_ID}/packages-microsoft-prod.deb"
+    dpkg -i /tmp/packages-microsoft-prod.deb
+    rm -f /tmp/packages-microsoft-prod.deb
     apt-get update
     apt-get install -y aznfs
 fi
